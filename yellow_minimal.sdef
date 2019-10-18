@@ -1,0 +1,104 @@
+//--------------------------------------------------------------------------------------------------
+// mangOH system definition for the mangOH Yellow board.
+//
+// Copyright (C) Sierra Wireless Inc.
+//--------------------------------------------------------------------------------------------------
+
+#include "shared.sdef"
+
+
+buildVars:
+{
+    MANGOH_BOARD = yellow
+
+    LEGATO_WIFI_PA = ${CURDIR}/linux_kernel_modules/cypwifi/scripts/pa_wifi.sh
+
+#if ${MANGOH_WP_CHIPSET_9X07} = 1
+    MANGOH_BME680_I2C_BUS = 6
+#elif ${MANGOH_WP_CHIPSET_9X15} = 1
+    MANGOH_BME680_I2C_BUS = 2
+#endif
+
+    // Exclude a few big libraries from the Legato apps to save space in the legato.cwe.
+    // These libraries are available in the root file system, but by default they also
+    // get added to some apps to prevent potential version mismatches when running on older
+    // root file systems.
+    USE_ROOTFS_CURL = 1
+    USE_ROOTFS_OPENSSL = 1
+    USE_ROOTFS_ZLIB = 1
+}
+
+#if ${OCTAVE} = 1
+#include "sinc/octave_full.sinc"
+#endif
+
+apps:
+{
+//    $CURDIR/apps/YellowSensorToCloud/imu
+//    $CURDIR/apps/YellowSensorToCloud/light
+//    $CURDIR/apps/YellowSensorToCloud/button
+//    $CURDIR/apps/Bme680EnvironmentalSensor/environment
+//    $CURDIR/apps/DataHub-Buzzer/buzzer
+//    $CURDIR/apps/YellowOnBoardActuators/leds
+//    $CURDIR/apps/BatteryService/battery
+//    $CURDIR/apps/VegasMode/vegasMode
+//    $CURDIR/apps/Welcome/helloYellow
+//    $CURDIR/samples/BluetoothSensorTag/bluetoothSensorTag
+//    $CURDIR/apps/ntag/ntag
+//    $CURDIR/apps/NtagDhubIf/NtagDhubIf
+}
+
+
+bindings:
+{
+//    battery.dhubIO -> dataHub.io
+//    light.dhubIO -> dataHub.io
+//    button.dhubIO -> dataHub.io
+//    button.gpio -> gpioService.le_gpioPin25
+//    environment.dhubIO -> dataHub.io
+//    vegasMode.dhubIO -> dataHub.io
+//    ntag.dhubIO -> dataHub.io
+//    ntag.dhubio2 -> dataHub.io
+//    NtagDhubIf.dhubIO -> dataHub.io
+}
+
+
+commands:
+{
+//    hello = helloYellow:/bin/hello
+//    ntag  = ntag:/bin/ntag
+}
+
+
+interfaceSearch:
+{
+    $CURDIR/apps/BatteryService
+    $CURDIR/apps/Bme680EnvironmentalSensor
+    $CURDIR/apps/YellowSensorToCloud/interfaces
+    $LEGATO_ROOT/interfaces/wifi
+}
+
+
+componentSearch:
+{
+    $CURDIR/apps/BatteryService
+    $CURDIR/apps/YellowSensorToCloud/components
+}
+
+
+kernelModules:
+{
+    $CURDIR/linux_kernel_modules/mangoh/mangoh_yellow_dev
+    $CURDIR/linux_kernel_modules/bmi160/bmi160-i2c
+    $CURDIR/linux_kernel_modules/bmi160/bmi160
+    $CURDIR/linux_kernel_modules/bmm150/bmc150_magn_i2c
+    $CURDIR/linux_kernel_modules/bmm150/bmc150_magn
+    $CURDIR/linux_kernel_modules/rtc-pcf85063/rtc-pcf85063
+    $CURDIR/linux_kernel_modules/rtc_sync/rtc_sync
+    $CURDIR/linux_kernel_modules/bq25601/bq25601
+    $CURDIR/linux_kernel_modules/bq27xxx/bq27xxx_battery
+    $CURDIR/linux_kernel_modules/opt300x/opt300x
+    $CURDIR/linux_kernel_modules/expander/expander
+    $CURDIR/linux_kernel_modules/cypwifi/cypwifi
+    $CURDIR/linux_kernel_modules/cp2130/cp2130
+}

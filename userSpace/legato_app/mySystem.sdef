@@ -1,0 +1,6 @@
+#include "mangOH/yellow_octave_minimal.sdef"
+
+apps:
+{
+    mySensor
+}

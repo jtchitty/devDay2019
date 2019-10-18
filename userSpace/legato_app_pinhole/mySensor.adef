@@ -1,0 +1,12 @@
+executables:
+{
+    readsensor = ( sensorReader )
+}
+
+processes:
+{
+    run:
+    {
+        ( readsensor )
+    }
+}

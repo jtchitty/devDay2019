@@ -1,0 +1,17 @@
+executables:
+{
+    readsensor = ( sensorReader )
+}
+
+processes:
+{
+    run:
+    {
+        ( readsensor )
+    }
+}
+
+bindings:
+{
+    readsensor.sensorReader.io -> dataHub.io
+}
