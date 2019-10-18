@@ -1,4 +1,4 @@
-#include "mangOH/yellow_octave_minimal.sdef"
+#include "mangOH/yellow_minimal.sdef"
 
 apps:
 {
